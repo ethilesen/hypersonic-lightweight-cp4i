@@ -8,8 +8,8 @@ spec:
       elements:
         - name: openshift-cert-manager
           namespace: cert-manager-operator
-        - name: platformnavigator
-          namespace: cp4i
+        #- name: platformnavigator
+        #  namespace: cp4i
       #  - name: datapower
       #    namespace: cp4i
       #  - name: apiconnect
@@ -18,8 +18,8 @@ spec:
       #    namespace: cp4i
         - name: mq
           namespace: cp4i
-        - name: eventstreams
-          namespace: cp4i
+      #  - name: eventstreams
+      #    namespace: cp4i
       #  - name: eventendpointmgmt
       #    namespace: cp4i
       #  - name: eventprocessing
@@ -34,10 +34,12 @@ spec:
           namespace: cert-utils-operator       
       #  - name: instana-agent
       #    namespace: openshift-operators
-        - name: clusterresourceoverride
-          namespace: cp4i
+      #  - name: clusterresourceoverride
+      #    namespace: cp4i
       #  - name: assetrepository
       #    namespace: cp4i
+        - name: openshift-telemetry
+          namespace: openshift-tempo-operator
   template:
     metadata:
       name: '{{name}}-operator'

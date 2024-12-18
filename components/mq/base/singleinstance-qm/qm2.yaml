@@ -1,16 +1,16 @@
 apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
 metadata:
-  name: singleinstance-qm
+  name: singleinstance-qm-2
   annotations:
     certmanager.k8s.io/disable-auto-restart: "true"
     configmap.reloader.stakater.com/reload: "singleinstance-qm-configmap"
     secret.reloader.stakater.com/reload: "mq-external-tls-secret"
 spec:
-  telemetry:
-    tracing:
-      instana:
-        enabled: true
+  #telemetry:
+  #  tracing:
+  #    instana:
+  #      enabled: true
   license:
     accept: true
     license: PATCHED_BY_KUSTOMIZE
@@ -21,23 +21,21 @@ spec:
         - env:
             - name: MQSNOAUT
               value: "yes"
-            #- name: APIX_LOGFILE
-            #  value: stdout
+            - name: APIX_LOGFILE
+              value: stdout
             - name: LOG_LEVEL
+              value: info
+            - name: MONITOR_LEVEL
               value: debug
-            #- name: MONITOR_LEVEL
-            #  value: debug
             - name: SPAN_FORMAT
               value: otel
-            #- name: IBMMQ_DEST_MONITOR_LEVEL_DEBUG
-            #  value: '.*'
-            - name: OTLP_EXPORTER_GRPC_ENDPOINT
-              value: 'tempo-tempostack-distributor.openshift-tempo-operator.svc.cluster.local:4317'
-            #- name: OTLP_EXPORTER_HTTP_URL
-            #  value: 'tempo-tempostack-distributor.openshift-tempo-operator.svc.cluster.local:4318/v1/traces'
+            #- name: OTLP_EXPORTER_GRPC_ENDPOINT
+            #  value: tempo-tempostack-distributor.openshift-tempo-operator.svc.cluster.local:4317
+            - name: OTLP_EXPORTER_HTTP_URL
+              value: tempo-tempostack-distributor.openshift-tempo-operator.svc.cluster.local:4318:/v1/traces
           name: qmgr
-          # image: image-registry.openshift-image-registry.svc:5000/cp4i/mq-otel
-          # imagePullPolicy: Always
+          image: image-registry.openshift-image-registry.svc:5000/cp4i/mq-otel
+          imagePullPolicy: Always
   queueManager:
     mqsc:
       - configMap:
@@ -49,9 +47,10 @@ spec:
           name: singleinstance-qm-configmap
           items:
             - mq.ini
+            - mq-exit.ini
     availability:
       type: SingleInstance
-    name: SINGLEINSTANCEQM
+    name: SINGLEINSTANCEQM2
     resources:
       limits:
         cpu: 500m

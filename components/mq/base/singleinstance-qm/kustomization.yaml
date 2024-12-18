@@ -8,6 +8,7 @@ configMapGenerator:
     files:
       - qm-config/tls.mqsc
       - qm-config/mq.ini
+      - qm-config/mq-exit.ini
 
 generatorOptions:
   disableNameSuffixHash: true
@@ -16,3 +17,4 @@ resources:
   # Resources for QM using a self signed cerver certificate.
 
   - qm.yaml
+  # - qm2.yaml
