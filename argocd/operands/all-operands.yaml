@@ -6,9 +6,9 @@ spec:
   generators:
   - list:
       elements:
-        - name: platformnavigator
-          namespace: cp4i
-          sync-wave: "200"
+        #- name: platformnavigator
+        #  namespace: cp4i
+        #  sync-wave: "200"
         #- name: apiconnect
         #  namespace: cp4i
         #  sync-wave: "300"
@@ -51,6 +51,8 @@ spec:
         #- name: assetrepository
         #  namespace: cp4i
         #  sync-wave: "200"
+        - name: openshift-telemetry
+          namespace: openshift-tempo-operator
   template:
     metadata:
       name: '{{name}}'
