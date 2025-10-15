@@ -14,9 +14,9 @@ spec:
           namespace: cp4i
         - name: appconnect
           namespace: cp4i
-        #- name: mq
-        #  namespace: cp4i
-        #- name: eventstreams
+        - name: mq
+          namespace: cp4i
+        - name: eventstreams
           namespace: cp4i
         - name: eventendpointmgmt
           namespace: cp4i
